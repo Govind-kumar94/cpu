@@ -1,0 +1,8 @@
+{
+  "name": "CPU Scheduler Pro",
+  "description": "Interactive CPU scheduling algorithm visualizer, simulator, and comparison workbench featuring Gantt charts, live timeline playback, process queues, and performance metrics for FCFS, SJF, SRTF, Priority, and Round Robin.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
