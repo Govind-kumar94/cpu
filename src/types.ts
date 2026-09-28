@@ -1,9 +1,29 @@
+export interface SystemProcessInfo {
+  realPid: number;
+  command: string;
+  cpuPercent: number;
+  memPercent: number;
+  nice: number;
+  elapsed: string;
+}
+
 export interface Process {
   pid: string;
   arrival_time: number;
   burst_time: number;
   priority: number;
   color: string;
+  systemInfo?: SystemProcessInfo;
+}
+
+export interface NotificationAlert {
+  id: string;
+  type: 'info' | 'success' | 'warning' | 'alert';
+  title: string;
+  message: string;
+  timestamp: string;
+  actionLabel?: string;
+  onAction?: () => void;
 }
 
 export interface ScheduledProcess extends Process {

@@ -20,35 +20,37 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
   const maxThroughput = Math.max(0.01, ...metrics.map((m) => m.throughput));
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-lg space-y-6 animate-fadeIn">
-      {/* Header & Trophy Banner */}
+    <div className="bg-slate-900 border border-slate-800 rounded p-5 shadow-sm space-y-5 animate-fadeIn font-sans text-slate-100">
+      {/* Header & Recommendation Banner */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-800">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-base font-bold text-white tracking-tight">Algorithm Benchmark & Comparison Matrix</h2>
-            <span className="text-xs px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-400 font-semibold border border-blue-500/30">
-              6 Algorithms Evaluated
+            <h2 className="text-base font-bold text-white tracking-tight font-mono uppercase">
+              Algorithm Benchmark & Comparison Matrix
+            </h2>
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-950 text-blue-300 font-semibold border border-blue-800">
+              6 Models Evaluated
             </span>
           </div>
           <p className="text-xs text-slate-400 mt-1">
-            Performance comparison across identical process workload and arrival profiles.
+            Comparative performance across identical process workload and arrival profiles.
           </p>
         </div>
 
         {/* Best Algorithm Badge */}
-        <div className="bg-gradient-to-r from-amber-500/15 via-amber-500/10 to-transparent border border-amber-500/30 rounded-xl p-3 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-amber-500/20 flex items-center justify-center shrink-0">
-            <Trophy className="w-5 h-5 text-amber-400" />
+        <div className="bg-slate-950 border border-amber-800/60 rounded p-3 flex items-center gap-3">
+          <div className="w-9 h-9 rounded bg-amber-950 border border-amber-800/80 flex items-center justify-center shrink-0">
+            <Trophy className="w-4 h-4 text-amber-400" />
           </div>
           <div>
-            <div className="text-[10px] uppercase font-bold text-amber-400/90 tracking-wider">
+            <div className="text-[10px] uppercase font-bold text-amber-400 tracking-wider font-mono">
               Optimal Recommendation
             </div>
-            <div className="text-sm font-black text-white flex items-center gap-2">
+            <div className="text-sm font-bold text-white flex items-center gap-2 font-mono">
               <span>{bestAlgorithm}</span>
               <button
                 onClick={() => onSelectAlgorithm(bestAlgorithm)}
-                className="text-[11px] text-blue-400 hover:text-blue-300 underline font-normal ml-1 flex items-center gap-0.5"
+                className="text-[11px] text-blue-400 hover:text-blue-300 underline font-normal ml-1 flex items-center gap-0.5 font-sans"
               >
                 <span>Simulate</span>
                 <ArrowRight className="w-3 h-3" />
@@ -59,7 +61,7 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
       </div>
 
       {/* Rationale explanation */}
-      <div className="bg-slate-950/70 border border-slate-800/80 rounded-lg p-3 text-xs text-slate-300 flex items-start gap-2.5">
+      <div className="bg-slate-950 border border-slate-800 rounded p-3 text-xs text-slate-300 flex items-start gap-2.5">
         <Zap className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
         <div>
           <span className="font-semibold text-white">Performance Analysis: </span>
@@ -68,21 +70,21 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
       </div>
 
       {/* Comparison Table */}
-      <div className="overflow-x-auto border border-slate-800 rounded-lg">
+      <div className="overflow-x-auto border border-slate-800 rounded">
         <table className="w-full text-left text-xs">
-          <thead className="bg-slate-950 text-slate-400 uppercase font-semibold text-[10px] border-b border-slate-800">
+          <thead className="bg-slate-950 text-slate-400 uppercase font-semibold text-[10px] border-b border-slate-800 font-mono">
             <tr>
-              <th className="py-3 px-3">Algorithm</th>
-              <th className="py-3 px-3 text-center">Avg Waiting Time</th>
-              <th className="py-3 px-3 text-center">Avg Turnaround</th>
-              <th className="py-3 px-3 text-center">Avg Response</th>
-              <th className="py-3 px-3 text-center">CPU Utilization</th>
-              <th className="py-3 px-3 text-center">Throughput</th>
-              <th className="py-3 px-3 text-center">Finish Time</th>
-              <th className="py-3 px-3 text-right">Action</th>
+              <th className="py-2.5 px-3">Algorithm</th>
+              <th className="py-2.5 px-3 text-center">Avg Waiting Time</th>
+              <th className="py-2.5 px-3 text-center">Avg Turnaround</th>
+              <th className="py-2.5 px-3 text-center">Avg Response</th>
+              <th className="py-2.5 px-3 text-center">CPU Utilization</th>
+              <th className="py-2.5 px-3 text-center">Throughput</th>
+              <th className="py-2.5 px-3 text-center">Finish Time</th>
+              <th className="py-2.5 px-3 text-right">Action</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-800/60 font-mono">
+          <tbody className="divide-y divide-slate-800 font-mono">
             {metrics.map((m) => {
               const isBest = m.name === bestAlgorithm;
 
@@ -90,7 +92,7 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
                 <tr
                   key={m.name}
                   className={`transition ${
-                    isBest ? 'bg-amber-500/5 hover:bg-amber-500/10' : 'hover:bg-slate-800/40'
+                    isBest ? 'bg-amber-950/20 hover:bg-amber-950/30' : 'hover:bg-slate-800/40'
                   }`}
                 >
                   <td className="py-2.5 px-3 font-sans font-medium text-slate-200 flex items-center gap-2">
@@ -100,7 +102,7 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
                   <td className="py-2.5 px-3 text-center font-bold text-blue-400">{m.waiting}u</td>
                   <td className="py-2.5 px-3 text-center font-bold text-emerald-400">{m.turnaround}u</td>
                   <td className="py-2.5 px-3 text-center text-slate-300">{m.response}u</td>
-                  <td className="py-2.5 px-3 text-center font-semibold text-purple-400">{m.cpu}%</td>
+                  <td className="py-2.5 px-3 text-center font-semibold text-slate-200">{m.cpu}%</td>
                   <td className="py-2.5 px-3 text-center text-cyan-400">{m.throughput}</td>
                   <td className="py-2.5 px-3 text-center text-slate-300">{m.finish}u</td>
                   <td className="py-2.5 px-3 text-right">
@@ -108,7 +110,7 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
                       onClick={() => onSelectAlgorithm(m.name)}
                       className="px-2.5 py-1 text-[11px] font-sans font-medium rounded bg-slate-800 hover:bg-blue-600 text-slate-200 hover:text-white transition border border-slate-700 hover:border-blue-500"
                     >
-                      View
+                      Simulate
                     </button>
                   </td>
                 </tr>
@@ -121,9 +123,9 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
       {/* Visual Comparative Charts */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
         {/* Chart 1: Average Waiting Time (Lower is better) */}
-        <div className="bg-slate-950/70 border border-slate-800 rounded-xl p-4">
+        <div className="bg-slate-950 border border-slate-800 rounded p-4">
           <div className="flex items-center justify-between mb-3">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider">
+            <h4 className="text-xs font-bold text-white uppercase tracking-wider font-mono">
               Avg Waiting Time (Lower is better)
             </h4>
             <span className="text-[10px] text-slate-500 font-mono">Time units</span>
@@ -141,11 +143,11 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
                     </span>
                     <span className="font-mono text-slate-400">{m.waiting}u</span>
                   </div>
-                  <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
+                  <div className="h-2 w-full bg-slate-800 rounded-sm overflow-hidden">
                     <div
                       style={{ width: `${width}%` }}
-                      className={`h-full rounded-full transition-all duration-500 ${
-                        isBest ? 'bg-amber-400' : 'bg-blue-500'
+                      className={`h-full rounded-sm transition-all duration-300 ${
+                        isBest ? 'bg-amber-500' : 'bg-blue-600'
                       }`}
                     />
                   </div>
@@ -156,9 +158,9 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
         </div>
 
         {/* Chart 2: Average Turnaround Time (Lower is better) */}
-        <div className="bg-slate-950/70 border border-slate-800 rounded-xl p-4">
+        <div className="bg-slate-950 border border-slate-800 rounded p-4">
           <div className="flex items-center justify-between mb-3">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider">
+            <h4 className="text-xs font-bold text-white uppercase tracking-wider font-mono">
               Avg Turnaround Time (Lower is better)
             </h4>
             <span className="text-[10px] text-slate-500 font-mono">Time units</span>
@@ -176,11 +178,11 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
                     </span>
                     <span className="font-mono text-slate-400">{m.turnaround}u</span>
                   </div>
-                  <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
+                  <div className="h-2 w-full bg-slate-800 rounded-sm overflow-hidden">
                     <div
                       style={{ width: `${width}%` }}
-                      className={`h-full rounded-full transition-all duration-500 ${
-                        isBest ? 'bg-amber-400' : 'bg-emerald-500'
+                      className={`h-full rounded-sm transition-all duration-300 ${
+                        isBest ? 'bg-amber-500' : 'bg-emerald-600'
                       }`}
                     />
                   </div>
@@ -191,9 +193,9 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
         </div>
 
         {/* Chart 3: CPU Utilization (Higher is better) */}
-        <div className="bg-slate-950/70 border border-slate-800 rounded-xl p-4">
+        <div className="bg-slate-950 border border-slate-800 rounded p-4">
           <div className="flex items-center justify-between mb-3">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider">
+            <h4 className="text-xs font-bold text-white uppercase tracking-wider font-mono">
               CPU Utilization (Higher is better)
             </h4>
             <span className="text-[10px] text-slate-500 font-mono">Percentage %</span>
@@ -206,12 +208,12 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
                 <div key={m.name} className="space-y-1">
                   <div className="flex justify-between text-[11px]">
                     <span className="text-slate-300 font-medium">{m.name}</span>
-                    <span className="font-mono text-purple-400 font-semibold">{m.cpu}%</span>
+                    <span className="font-mono text-slate-200 font-semibold">{m.cpu}%</span>
                   </div>
-                  <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
+                  <div className="h-2 w-full bg-slate-800 rounded-sm overflow-hidden">
                     <div
                       style={{ width: `${width}%` }}
-                      className="h-full rounded-full bg-purple-500 transition-all duration-500"
+                      className="h-full rounded-sm bg-slate-500 transition-all duration-300"
                     />
                   </div>
                 </div>
@@ -221,9 +223,9 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
         </div>
 
         {/* Chart 4: Throughput (Higher is better) */}
-        <div className="bg-slate-950/70 border border-slate-800 rounded-xl p-4">
+        <div className="bg-slate-950 border border-slate-800 rounded p-4">
           <div className="flex items-center justify-between mb-3">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider">
+            <h4 className="text-xs font-bold text-white uppercase tracking-wider font-mono">
               Throughput (Higher is better)
             </h4>
             <span className="text-[10px] text-slate-500 font-mono">Tasks / unit</span>
@@ -238,10 +240,10 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
                     <span className="text-slate-300 font-medium">{m.name}</span>
                     <span className="font-mono text-cyan-400 font-semibold">{m.throughput}</span>
                   </div>
-                  <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
+                  <div className="h-2 w-full bg-slate-800 rounded-sm overflow-hidden">
                     <div
                       style={{ width: `${width}%` }}
-                      className="h-full rounded-full bg-cyan-500 transition-all duration-500"
+                      className="h-full rounded-sm bg-cyan-600 transition-all duration-300"
                     />
                   </div>
                 </div>

@@ -71,7 +71,7 @@ export const AlgorithmSelector: React.FC<AlgorithmSelectorProps> = ({
   const activeMeta = ALGORITHMS.find(a => a.name === currentAlgorithm) || ALGORITHMS[0];
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-sm">
+    <div className="bg-slate-900 border border-slate-800 rounded p-4 shadow-sm font-sans">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         {/* Algorithm Tabs */}
         <div className="flex flex-wrap gap-2">
@@ -81,23 +81,23 @@ export const AlgorithmSelector: React.FC<AlgorithmSelectorProps> = ({
               <button
                 key={algo.name}
                 onClick={() => onSelectAlgorithm(algo.name)}
-                className={`relative px-3.5 py-2 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 border ${
+                className={`relative px-3 py-1.5 rounded text-xs font-semibold transition flex items-center gap-1.5 border ${
                   isSelected
-                    ? 'bg-blue-600 text-white border-blue-500 shadow-md shadow-blue-500/20'
+                    ? 'bg-blue-600 text-white border-blue-500 shadow-sm'
                     : 'bg-slate-850 hover:bg-slate-800 text-slate-300 border-slate-750 hover:border-slate-700'
                 }`}
               >
                 <span>{algo.name}</span>
                 <span
-                  className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
+                  className={`text-[10px] px-1.5 py-0.5 rounded font-mono ${
                     isSelected
-                      ? 'bg-blue-700/80 text-blue-100'
+                      ? 'bg-blue-700 text-blue-100'
                       : algo.preemptive
-                      ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
-                      : 'bg-slate-700 text-slate-400'
+                      ? 'bg-amber-950 text-amber-300 border border-amber-850'
+                      : 'bg-slate-750 text-slate-400'
                   }`}
                 >
-                  {algo.preemptive ? 'P' : 'NP'}
+                  {algo.preemptive ? 'PREEMPT' : 'NON-P'}
                 </span>
               </button>
             );
@@ -106,7 +106,7 @@ export const AlgorithmSelector: React.FC<AlgorithmSelectorProps> = ({
 
         {/* Quantum Control for Round Robin */}
         {currentAlgorithm === 'Round Robin' && (
-          <div className="flex items-center gap-3 bg-slate-950/80 border border-blue-500/30 rounded-lg px-3.5 py-1.5 animate-fadeIn">
+          <div className="flex items-center gap-3 bg-slate-950 border border-slate-700 rounded px-3 py-1.5 animate-fadeIn">
             <div className="flex items-center gap-1.5 text-xs text-blue-400 font-semibold">
               <Timer className="w-4 h-4" />
               <span>Time Quantum (q):</span>
@@ -120,8 +120,8 @@ export const AlgorithmSelector: React.FC<AlgorithmSelectorProps> = ({
                 onChange={(e) => onChangeQuantum(parseInt(e.target.value, 10))}
                 className="w-20 accent-blue-500 cursor-pointer"
               />
-              <span className="text-sm font-bold text-white font-mono bg-blue-500/20 px-2 py-0.5 rounded border border-blue-500/30">
-                {quantum}
+              <span className="text-xs font-bold text-white font-mono bg-blue-950 px-2 py-0.5 rounded border border-blue-800">
+                {quantum} units
               </span>
             </div>
           </div>

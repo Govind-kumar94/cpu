@@ -1,21 +1,21 @@
 import { Process, ScheduledProcess, ExecutionBlock, ScheduleResult, AlgorithmName } from '../types';
 
 export const PROCESS_COLORS = [
-  '#3b82f6', // Blue
-  '#10b981', // Emerald
-  '#f59e0b', // Amber
-  '#ef4444', // Red
-  '#8b5cf6', // Violet
-  '#06b6d4', // Cyan
-  '#ec4899', // Pink
-  '#84cc16', // Lime
-  '#14b8a6', // Teal
-  '#f97316', // Orange
-  '#a855f7', // Purple
-  '#6366f1', // Indigo
+  '#1d4ed8', // Intercity Blue
+  '#15803d', // Alpine Forest Green
+  '#b45309', // Amber Junction
+  '#b91c1c', // Signal Crimson
+  '#0284c7', // Steel Coastal
+  '#0f766e', // Mineral Teal
+  '#475569', // Granite Slate
+  '#c2410c', // Ochre Rust
+  '#1e3a8a', // Deep Marine
+  '#166534', // Pine Regional
+  '#9a3412', // Terracotta Brick
+  '#334155', // Ballast Stone
 ];
 
-export const IDLE_COLOR = '#475569'; // Slate 600
+export const IDLE_COLOR = '#1e293b'; // Railway Ballast Slate
 
 export function cloneProcesses(processes: Process[]): ScheduledProcess[] {
   return processes.map((p, i) => ({

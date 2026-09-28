@@ -65,11 +65,11 @@ export const ProcessTable: React.FC<ProcessTableProps> = ({
   };
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-sm flex flex-col h-full">
+    <div className="bg-slate-900 border border-slate-800 rounded p-4 shadow-sm flex flex-col h-full font-sans">
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <h2 className="text-sm font-bold text-white uppercase tracking-wider">Process Workload</h2>
-          <span className="text-xs px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 font-mono">
+          <h2 className="text-xs font-bold text-white uppercase tracking-wider font-mono">Process Manifest</h2>
+          <span className="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-400 font-mono">
             {processes.length} tasks
           </span>
         </div>
@@ -79,12 +79,12 @@ export const ProcessTable: React.FC<ProcessTableProps> = ({
           title="Reset to default textbook problem"
         >
           <RotateCcw className="w-3.5 h-3.5" />
-          <span>Reset</span>
+          <span>Reset Default</span>
         </button>
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto flex-1 max-h-[300px] border border-slate-800 rounded-lg">
+      <div className="overflow-x-auto flex-1 max-h-[300px] border border-slate-800 rounded">
         <table className="w-full text-left text-xs">
           <thead className="bg-slate-950/80 text-slate-400 uppercase font-semibold text-[11px] sticky top-0 z-10 border-b border-slate-800">
             <tr>
@@ -107,17 +107,27 @@ export const ProcessTable: React.FC<ProcessTableProps> = ({
                   key={`${p.pid}-${idx}`}
                   className="hover:bg-slate-800/40 transition group"
                 >
-                  <td className="py-2 px-3 flex items-center gap-2 font-sans font-medium text-slate-200">
-                    <span
-                      className="w-3 h-3 rounded-full shrink-0 shadow-sm"
-                      style={{ backgroundColor: p.color }}
-                    />
-                    <input
-                      type="text"
-                      value={p.pid}
-                      onChange={(e) => onUpdateProcess(idx, { ...p, pid: e.target.value })}
-                      className="w-24 bg-transparent focus:bg-slate-800 px-1 py-0.5 rounded text-white font-medium border border-transparent focus:border-slate-600 focus:outline-none"
-                    />
+                  <td className="py-2 px-3 font-sans font-medium text-slate-200">
+                    <div className="flex items-center gap-2">
+                      <span
+                        className="w-2.5 h-2.5 rounded-sm shrink-0 shadow-sm"
+                        style={{ backgroundColor: p.color }}
+                      />
+                      <input
+                        type="text"
+                        value={p.pid}
+                        onChange={(e) => onUpdateProcess(idx, { ...p, pid: e.target.value })}
+                        className="w-28 bg-transparent focus:bg-slate-800 px-1 py-0.5 rounded text-white font-medium border border-transparent focus:border-slate-600 focus:outline-none font-mono text-xs"
+                      />
+                      {p.systemInfo && (
+                        <span
+                          className="text-[10px] text-blue-400 font-mono shrink-0 cursor-help"
+                          title={`Real Host Task: PID ${p.systemInfo.realPid} | Comm: ${p.systemInfo.command} | CPU: ${p.systemInfo.cpuPercent}% | Mem: ${p.systemInfo.memPercent}% | Nice: ${p.systemInfo.nice} | Elapsed: ${p.systemInfo.elapsed}`}
+                        >
+                          [SYS]
+                        </span>
+                      )}
+                    </div>
                   </td>
 
                   <td className="py-2 px-2 text-center">
@@ -167,16 +177,16 @@ export const ProcessTable: React.FC<ProcessTableProps> = ({
 
                   <td className="py-2 px-2 text-center">
                     {isCompleted ? (
-                      <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-400 font-sans font-medium">
+                      <span className="text-[11px] text-emerald-400 font-medium font-mono">
                         Done (t={scheduled.completion_time})
                       </span>
                     ) : hasArrived ? (
-                      <span className="text-[10px] px-2 py-0.5 rounded bg-blue-500/15 text-blue-400 font-sans font-medium">
+                      <span className="text-[11px] text-blue-400 font-medium font-sans">
                         Ready
                       </span>
                     ) : (
-                      <span className="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-500 font-sans">
-                        Arrives t={p.arrival_time}
+                      <span className="text-[11px] text-slate-500 font-mono">
+                        t={p.arrival_time}
                       </span>
                     )}
                   </td>
@@ -205,7 +215,7 @@ export const ProcessTable: React.FC<ProcessTableProps> = ({
           placeholder="PID"
           value={newPid}
           onChange={(e) => setNewPid(e.target.value)}
-          className="w-20 bg-slate-800 text-white text-xs px-2.5 py-1.5 rounded-lg border border-slate-700 focus:outline-none focus:border-blue-500 font-mono"
+          className="w-20 bg-slate-800 text-white text-xs px-2.5 py-1.5 rounded border border-slate-700 focus:outline-none focus:border-blue-500 font-mono"
         />
         <input
           type="number"
@@ -213,7 +223,7 @@ export const ProcessTable: React.FC<ProcessTableProps> = ({
           placeholder="Arrival"
           value={newArrival}
           onChange={(e) => setNewArrival(e.target.value)}
-          className="w-18 bg-slate-800 text-white text-xs px-2.5 py-1.5 rounded-lg border border-slate-700 focus:outline-none focus:border-blue-500 font-mono text-center"
+          className="w-18 bg-slate-800 text-white text-xs px-2.5 py-1.5 rounded border border-slate-700 focus:outline-none focus:border-blue-500 font-mono text-center"
           title="Arrival Time"
         />
         <input
@@ -222,7 +232,7 @@ export const ProcessTable: React.FC<ProcessTableProps> = ({
           placeholder="Burst"
           value={newBurst}
           onChange={(e) => setNewBurst(e.target.value)}
-          className="w-18 bg-slate-800 text-white text-xs px-2.5 py-1.5 rounded-lg border border-slate-700 focus:outline-none focus:border-blue-500 font-mono text-center"
+          className="w-18 bg-slate-800 text-white text-xs px-2.5 py-1.5 rounded border border-slate-700 focus:outline-none focus:border-blue-500 font-mono text-center"
           title="Burst Time"
         />
         <input
@@ -231,12 +241,12 @@ export const ProcessTable: React.FC<ProcessTableProps> = ({
           placeholder="Priority"
           value={newPriority}
           onChange={(e) => setNewPriority(e.target.value)}
-          className="w-18 bg-slate-800 text-white text-xs px-2.5 py-1.5 rounded-lg border border-slate-700 focus:outline-none focus:border-blue-500 font-mono text-center"
+          className="w-18 bg-slate-800 text-white text-xs px-2.5 py-1.5 rounded border border-slate-700 focus:outline-none focus:border-blue-500 font-mono text-center"
           title="Priority (1 = Highest)"
         />
         <button
           type="submit"
-          className="flex items-center gap-1 bg-blue-600 hover:bg-blue-500 text-white text-xs px-3 py-1.5 rounded-lg font-medium transition ml-auto"
+          className="flex items-center gap-1 bg-blue-600 hover:bg-blue-500 text-white text-xs px-3 py-1.5 rounded font-medium transition ml-auto"
         >
           <Plus className="w-3.5 h-3.5" />
           <span>Add Task</span>

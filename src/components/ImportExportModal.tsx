@@ -96,8 +96,8 @@ export const ImportExportModal: React.FC<ImportExportModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-xl shadow-2xl overflow-hidden animate-fadeIn">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 font-sans">
+      <div className="bg-slate-900 border border-slate-800 rounded w-full max-w-xl shadow-2xl overflow-hidden animate-fadeIn">
         {/* Modal Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800">
           <div className="flex items-center gap-3">
@@ -124,7 +124,7 @@ export const ImportExportModal: React.FC<ImportExportModalProps> = ({
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition"
+            className="p-1 rounded text-slate-400 hover:text-white hover:bg-slate-800 transition"
           >
             <X className="w-5 h-5" />
           </button>
@@ -140,7 +140,7 @@ export const ImportExportModal: React.FC<ImportExportModalProps> = ({
                   <select
                     value={importFormat}
                     onChange={(e) => setImportFormat(e.target.value as 'csv' | 'json')}
-                    className="bg-slate-800 border border-slate-700 text-xs text-slate-200 rounded px-2 py-1"
+                    className="bg-slate-800 border border-slate-700 text-xs text-slate-200 rounded px-2 py-1 font-mono"
                   >
                     <option value="csv">CSV (Comma Separated)</option>
                     <option value="json">JSON Array</option>
@@ -168,13 +168,13 @@ export const ImportExportModal: React.FC<ImportExportModalProps> = ({
                       : '[{ "pid": "P1", "arrival": 0, "burst": 4, "priority": 1 }]'
                   }
                   rows={6}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-xs font-mono text-slate-200 focus:outline-none focus:border-blue-500"
+                  className="w-full bg-slate-950 border border-slate-800 rounded p-3 text-xs font-mono text-slate-200 focus:outline-none focus:border-blue-500"
                 />
               </div>
 
               {/* File upload drag drop alternative */}
               <div className="flex items-center justify-between">
-                <label className="flex items-center gap-2 cursor-pointer text-xs text-slate-400 hover:text-slate-200 bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700 transition">
+                <label className="flex items-center gap-2 cursor-pointer text-xs text-slate-400 hover:text-slate-200 bg-slate-800 px-3 py-1.5 rounded border border-slate-700 transition">
                   <Upload className="w-3.5 h-3.5" />
                   <span>Choose CSV/JSON file</span>
                   <input
@@ -187,7 +187,7 @@ export const ImportExportModal: React.FC<ImportExportModalProps> = ({
 
                 <button
                   onClick={handleImport}
-                  className="px-4 py-2 text-xs font-bold rounded-lg bg-blue-600 hover:bg-blue-500 text-white transition shadow-md shadow-blue-500/20"
+                  className="px-4 py-2 text-xs font-semibold rounded bg-blue-600 hover:bg-blue-500 text-white transition shadow-sm"
                 >
                   Import Processes
                 </button>
@@ -202,27 +202,27 @@ export const ImportExportModal: React.FC<ImportExportModalProps> = ({
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <button
                   onClick={handleExportCSV}
-                  className="flex flex-col items-center justify-center p-4 rounded-xl bg-slate-800 hover:bg-slate-750 border border-slate-700 transition group text-center"
+                  className="flex flex-col items-center justify-center p-4 rounded bg-slate-800 hover:bg-slate-750 border border-slate-700 transition group text-center"
                 >
-                  <Download className="w-6 h-6 text-emerald-400 mb-2 group-hover:scale-110 transition" />
+                  <Download className="w-6 h-6 text-emerald-400 mb-2 group-hover:scale-105 transition" />
                   <span className="text-xs font-bold text-white">CSV Spreadsheet</span>
                   <span className="text-[10px] text-slate-400 mt-0.5">Compatible with Excel</span>
                 </button>
 
                 <button
                   onClick={handleExportJSON}
-                  className="flex flex-col items-center justify-center p-4 rounded-xl bg-slate-800 hover:bg-slate-750 border border-slate-700 transition group text-center"
+                  className="flex flex-col items-center justify-center p-4 rounded bg-slate-800 hover:bg-slate-750 border border-slate-700 transition group text-center"
                 >
-                  <FileText className="w-6 h-6 text-blue-400 mb-2 group-hover:scale-110 transition" />
+                  <FileText className="w-6 h-6 text-blue-400 mb-2 group-hover:scale-105 transition" />
                   <span className="text-xs font-bold text-white">JSON Data</span>
                   <span className="text-[10px] text-slate-400 mt-0.5">Raw structured data</span>
                 </button>
 
                 <button
                   onClick={handlePrint}
-                  className="flex flex-col items-center justify-center p-4 rounded-xl bg-slate-800 hover:bg-slate-750 border border-slate-700 transition group text-center"
+                  className="flex flex-col items-center justify-center p-4 rounded bg-slate-800 hover:bg-slate-750 border border-slate-700 transition group text-center"
                 >
-                  <Download className="w-6 h-6 text-purple-400 mb-2 group-hover:scale-110 transition" />
+                  <Download className="w-6 h-6 text-indigo-400 mb-2 group-hover:scale-105 transition" />
                   <span className="text-xs font-bold text-white">Print / PDF Report</span>
                   <span className="text-[10px] text-slate-400 mt-0.5">Summary document</span>
                 </button>
@@ -232,10 +232,10 @@ export const ImportExportModal: React.FC<ImportExportModalProps> = ({
 
           {statusMessage && (
             <div
-              className={`mt-4 p-2.5 rounded-lg text-xs flex items-center gap-2 ${
+              className={`mt-4 p-2.5 rounded text-xs flex items-center gap-2 ${
                 statusMessage.isError
-                  ? 'bg-red-500/15 text-red-400 border border-red-500/30'
-                  : 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'
+                  ? 'bg-red-950/40 text-red-400 border border-red-800'
+                  : 'bg-emerald-950/40 text-emerald-400 border border-emerald-800'
               }`}
             >
               {statusMessage.isError ? <AlertCircle className="w-4 h-4" /> : <Check className="w-4 h-4" />}
